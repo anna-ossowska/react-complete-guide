@@ -3,49 +3,64 @@ import './ExpenseForm.css';
 import '../Expenses/Expenses';
 
 const ExpenseForm = () => {
-  // Multiple states approach
-  // const [enteredTitle, setEnteredTitle] = useState('');
-  // const [enteredAmount, setEnteredAmount] = useState('');
-  // const [enteredDate, setEnteredDate] = useState('');
-
-  // const titleChangeHandler = function (e) {
-  //   setEnteredTitle(e.target.value);
-  //   console.log(enteredTitle);
-  // };
-
-  // One state approach
-  const [userInput, setUserInput] = useState({
-    enteredTitle: '',
-    enteredAmount: '',
-    enteredDate: '',
-  });
-
-  console.log(userInput);
+  // MULTIPLE STATE APPROACH
+  const [enteredTitle, setEnteredTitle] = useState('');
+  const [enteredAmount, setEnteredAmount] = useState('');
+  const [enteredDate, setEnteredDate] = useState('');
 
   const titleChangeHandler = function (e) {
-    // setUserInput({
-    //   ...userInput,
-    //   enteredTitle: e.target.value,
-    // });
-    setUserInput(prev => {
-      return { ...prev, enteredTitle: e.target.value };
-    });
+    setEnteredTitle(e.target.value);
   };
 
   const amountChangeHandler = function (e) {
-    setUserInput(prev => {
-      return { ...prev, enteredAmount: e.target.value };
-    });
+    setEnteredAmount(e.target.value);
   };
 
   const dateChangeHandler = function (e) {
-    setUserInput(prev => {
-      return { ...prev, enteredAmount: e.target.value };
-    });
+    setEnteredDate(e.target.value);
   };
 
+  const submitHandler = function (e) {
+    e.preventDefault();
+
+    const expenseData = {
+      title: enteredTitle,
+      amount: enteredAmount,
+      date: new Date(enteredDate),
+    };
+
+    console.log(expenseData);
+  };
+
+  // ONE STATE APPROACH
+  // const [userInput, setUserInput] = useState({
+  //   enteredTitle: '',
+  //   enteredAmount: '',
+  //   enteredDate: '',
+  // });
+
+  // console.log(userInput);
+
+  // const titleChangeHandler = function (e) {
+  //   setUserInput(prev => {
+  //     return { ...prev, enteredTitle: e.target.value };
+  //   });
+  // };
+
+  // const amountChangeHandler = function (e) {
+  //   setUserInput(prev => {
+  //     return { ...prev, enteredAmount: e.target.value };
+  //   });
+  // };
+
+  // const dateChangeHandler = function (e) {
+  //   setUserInput(prev => {
+  //     return { ...prev, enteredAmount: e.target.value };
+  //   });
+  // };
+
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
