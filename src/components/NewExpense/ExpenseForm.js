@@ -3,23 +3,45 @@ import './ExpenseForm.css';
 import '../Expenses/Expenses';
 
 const ExpenseForm = () => {
-  const [enteredTitle, setEnteredTitle] = useState('');
-  const [enteredAmount, setEnteredAmount] = useState('');
-  const [enteredDate, setEnteredDate] = useState('');
+  // Multiple states approach
+  // const [enteredTitle, setEnteredTitle] = useState('');
+  // const [enteredAmount, setEnteredAmount] = useState('');
+  // const [enteredDate, setEnteredDate] = useState('');
+
+  // const titleChangeHandler = function (e) {
+  //   setEnteredTitle(e.target.value);
+  //   console.log(enteredTitle);
+  // };
+
+  // One state approach
+  const [userInput, setUserInput] = useState({
+    enteredTitle: '',
+    enteredAmount: '',
+    enteredDate: '',
+  });
+
+  console.log(userInput);
 
   const titleChangeHandler = function (e) {
-    setEnteredTitle(e.target.value);
-    console.log(enteredTitle);
+    // setUserInput({
+    //   ...userInput,
+    //   enteredTitle: e.target.value,
+    // });
+    setUserInput(prev => {
+      return { ...prev, enteredTitle: e.target.value };
+    });
   };
 
   const amountChangeHandler = function (e) {
-    setEnteredAmount(e.target.value);
-    console.log(enteredAmount);
+    setUserInput(prev => {
+      return { ...prev, enteredAmount: e.target.value };
+    });
   };
 
   const dateChangeHandler = function (e) {
-    setEnteredDate(e.target.value);
-    console.log(enteredDate);
+    setUserInput(prev => {
+      return { ...prev, enteredAmount: e.target.value };
+    });
   };
 
   return (
