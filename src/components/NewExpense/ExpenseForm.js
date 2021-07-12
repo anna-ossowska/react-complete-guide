@@ -8,6 +8,7 @@ const ExpenseForm = props => {
   const [enteredAmount, setEnteredAmount] = useState('');
   const [enteredDate, setEnteredDate] = useState('');
 
+  // String user input
   const titleChangeHandler = function (e) {
     setEnteredTitle(e.target.value);
   };
@@ -29,12 +30,14 @@ const ExpenseForm = props => {
   const submitHandler = function (e) {
     e.preventDefault();
 
+    // Generating data
     const expenseData = {
       title: enteredTitle,
       amount: enteredAmount,
       date: new Date(enteredDate),
     };
 
+    // Passing data up to NewExpense component
     props.onSaveExpenseData(expenseData);
     clearInputs();
   };

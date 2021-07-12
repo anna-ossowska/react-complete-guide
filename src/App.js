@@ -30,11 +30,16 @@ const App = () => {
     console.log(expense);
   };
 
+  const addSelectedYearHandler = function (year) {
+    console.log('In App.js');
+    console.log(year);
+  };
+
   return (
     <div>
       <h2>Let's get started!</h2>
       <NewExpense onAddExpense={addExpenseHandler} />
-      <Expenses items={expenses} />
+      <Expenses items={expenses} onAddSelectedYear={addSelectedYearHandler} />
     </div>
   );
 };
