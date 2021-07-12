@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './ExpenseForm.css';
 import '../Expenses/Expenses';
 
-const ExpenseForm = () => {
+const ExpenseForm = props => {
   // MULTIPLE STATE APPROACH
   const [enteredTitle, setEnteredTitle] = useState('');
   const [enteredAmount, setEnteredAmount] = useState('');
@@ -35,36 +35,9 @@ const ExpenseForm = () => {
       date: new Date(enteredDate),
     };
 
-    console.log(expenseData);
+    props.onSaveExpenseData(expenseData);
     clearInputs();
   };
-
-  // ONE STATE APPROACH
-  // const [userInput, setUserInput] = useState({
-  //   enteredTitle: '',
-  //   enteredAmount: '',
-  //   enteredDate: '',
-  // });
-
-  // console.log(userInput);
-
-  // const titleChangeHandler = function (e) {
-  //   setUserInput(prev => {
-  //     return { ...prev, enteredTitle: e.target.value };
-  //   });
-  // };
-
-  // const amountChangeHandler = function (e) {
-  //   setUserInput(prev => {
-  //     return { ...prev, enteredAmount: e.target.value };
-  //   });
-  // };
-
-  // const dateChangeHandler = function (e) {
-  //   setUserInput(prev => {
-  //     return { ...prev, enteredAmount: e.target.value };
-  //   });
-  // };
 
   return (
     <form onSubmit={submitHandler}>
@@ -91,7 +64,7 @@ const ExpenseForm = () => {
           <label>Date</label>
           <input
             type="date"
-            value="enteredDate"
+            value={enteredDate}
             min="2019-01-01"
             max="2022-12-31"
             onChange={dateChangeHandler}
@@ -106,3 +79,30 @@ const ExpenseForm = () => {
 };
 
 export default ExpenseForm;
+
+// ONE STATE APPROACH
+// const [userInput, setUserInput] = useState({
+//   enteredTitle: '',
+//   enteredAmount: '',
+//   enteredDate: '',
+// });
+
+// console.log(userInput);
+
+// const titleChangeHandler = function (e) {
+//   setUserInput(prev => {
+//     return { ...prev, enteredTitle: e.target.value };
+//   });
+// };
+
+// const amountChangeHandler = function (e) {
+//   setUserInput(prev => {
+//     return { ...prev, enteredAmount: e.target.value };
+//   });
+// };
+
+// const dateChangeHandler = function (e) {
+//   setUserInput(prev => {
+//     return { ...prev, enteredAmount: e.target.value };
+//   });
+// };
