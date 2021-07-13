@@ -33,7 +33,7 @@ const ExpenseForm = props => {
     // Generating data
     const expenseData = {
       title: enteredTitle,
-      amount: enteredAmount,
+      amount: +enteredAmount,
       date: new Date(enteredDate),
     };
 
