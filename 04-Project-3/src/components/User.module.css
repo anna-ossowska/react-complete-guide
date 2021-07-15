@@ -1,0 +1,9 @@
+.user-info {
+  border: #ccc 1px solid;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.user-info span {
+  color: #5dacec;
+}
