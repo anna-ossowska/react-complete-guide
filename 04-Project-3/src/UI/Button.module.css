@@ -8,4 +8,9 @@
   font-size: 1.75rem;
   text-align: center;
   cursor: pointer;
+  transition: background-color 0.2s ease-in;
+}
+
+.button:hover {
+  background-color: #4497db;
 }
