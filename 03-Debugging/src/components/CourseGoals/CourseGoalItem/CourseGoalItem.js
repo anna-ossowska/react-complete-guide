@@ -5,6 +5,7 @@ import './CourseGoalItem.css';
 const CourseGoalItem = (props) => {
   const deleteHandler = () => {
     props.onDelete(props.id);
+    console.log(props.id);
   };
 
   return (
