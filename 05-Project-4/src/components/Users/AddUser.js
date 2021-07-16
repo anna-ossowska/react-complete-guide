@@ -32,6 +32,8 @@ const AddUser = props => {
       return;
     }
 
+    props.onAddUser(enteredUserName, +enteredAge);
+
     console.log(enteredUserName, enteredAge);
     resetInputFields();
   };
