@@ -6,7 +6,7 @@ import Button from './Button';
 const ErrorModal = props => {
   return (
     <div>
-      <div className={styles.overlay}></div>
+      <div className={styles.overlay} onClick={props.onConfirm}></div>
       <Card className={styles.modal}>
         <header className={styles.header}>
           <h2>{props.title}</h2>
@@ -15,7 +15,7 @@ const ErrorModal = props => {
           <p>{props.message}</p>
         </div>
         <footer className={styles.actions}>
-          <Button>OK</Button>
+          <Button onClick={props.onConfirm}>OK</Button>
         </footer>
       </Card>
     </div>
