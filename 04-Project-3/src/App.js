@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
-import User from './components/User';
 import UserForm from './components/UserForm';
+import UserList from './components/UserList';
 import Card from './UI/Card';
 
 const DUMMY_DATA = [
@@ -18,13 +18,14 @@ const DUMMY_DATA = [
 ];
 
 function App() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(DUMMY_DATA);
 
   const addUserHandler = function (user) {
     setUsers((prev) => [user, ...prev]);
   };
 
-  console.log(users);
+  console.log('App.js', users);
+
   return (
     <div>
       <Card>
@@ -32,7 +33,7 @@ function App() {
       </Card>
 
       <Card>
-        <User />
+        <UserList users={users} />
       </Card>
     </div>
   );

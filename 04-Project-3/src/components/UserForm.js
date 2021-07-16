@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import styles from './UserForm.module.css';
 import Button from '../UI/Button';
 
-// Pass data from userForm to App
-
 const UserForm = (props) => {
   const [inputName, setInputName] = useState('');
   const [inputAge, setInputAge] = useState('');
@@ -27,7 +25,7 @@ const UserForm = (props) => {
 
     const user = {
       userName: inputName,
-      userAge: inputAge,
+      age: inputAge,
       id: Math.random().toString(),
     };
     // Pass data up to App.js
