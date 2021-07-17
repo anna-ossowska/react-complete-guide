@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './UserForm.module.css';
 import Button from '../UI/Button';
+import Modal from '../UI/Modal';
 
 const UserForm = (props) => {
   const [inputName, setInputName] = useState('');
@@ -35,6 +36,7 @@ const UserForm = (props) => {
 
   return (
     <div>
+      <Modal></Modal>
       <form onSubmit={onSubmitHandler}>
         <div className={styles['form-controls']}>
           <div>
