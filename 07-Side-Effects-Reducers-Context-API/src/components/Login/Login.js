@@ -64,6 +64,7 @@ const Login = (props) => {
         >
           <label htmlFor="password">Password</label>
           <input
+            autoComplete="on"
             type="password"
             id="password"
             value={enteredPassword}
