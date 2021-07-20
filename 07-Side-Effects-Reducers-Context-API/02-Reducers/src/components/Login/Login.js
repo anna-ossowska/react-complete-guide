@@ -25,9 +25,6 @@ const emailReducer = (prevState, action) => {
 };
 
 const passwordReducer = (prevState, action) => {
-  console.log('prevState', prevState);
-  console.log('action', action);
-
   if (action.type === 'USER_INPUT') {
     return { value: action.val, isValid: action.val.trim().length > 6 };
   }
@@ -56,8 +53,6 @@ const Login = (props) => {
     isValid: null,
   });
 
-  console.log(useReducer());
-
   const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
     value: '',
     isValid: null,
@@ -71,18 +66,35 @@ const Login = (props) => {
     };
   }, []);
 
+  const { isValid: emailIsValid } = emailState;
+  const { isValid: passwordIsValid } = passwordState;
+
+  // Optimizing useEffect
+  // If just a value changes, and validity does not - arrow fn will NOT run
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      console.log('Checking form validity!');
+      setFormIsValid(emailIsValid && passwordIsValid);
+    }, 500);
+
+    return () => {
+      console.log('CLEANUP');
+      clearTimeout(identifier);
+    };
+  }, [emailIsValid, passwordIsValid]);
+
   const emailChangeHandler = (event) => {
     // (!!!) dispatchEmail
     dispatchEmail({ type: 'USER_INPUT', val: event.target.value });
 
-    setFormIsValid(emailState.isValid && passwordState.isValid);
+    // setFormIsValid(emailState.isValid && passwordState.isValid);
   };
 
   const passwordChangeHandler = (event) => {
     // (!!!) dispatchPassword
     dispatchPassword({ type: 'USER_INPUT', val: event.target.value });
 
-    setFormIsValid(emailState.isValid && passwordState.isValid);
+    // setFormIsValid(emailState.isValid && passwordState.isValid);
   };
 
   const validateEmailHandler = () => {
