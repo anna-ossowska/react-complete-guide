@@ -4,6 +4,8 @@ import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import MainHeader from './components/MainHeader/MainHeader';
 
+import AuthContext from './store/auth-context.js';
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -27,14 +29,20 @@ function App() {
     setIsLoggedIn(false);
   };
 
+  // Provider component accepts a value prop which is passed to consumers (child components of the Provider)
+  // All consumers re-render when the Provider's value prop changes
   return (
-    <React.Fragment>
-      <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: isLoggedIn,
+      }}
+    >
+      <MainHeader onLogout={logoutHandler} />
       <main>
         {!isLoggedIn && <Login onLogin={loginHandler} />}
         {isLoggedIn && <Home onLogout={logoutHandler} />}
       </main>
-    </React.Fragment>
+    </AuthContext.Provider>
   );
 }
 
