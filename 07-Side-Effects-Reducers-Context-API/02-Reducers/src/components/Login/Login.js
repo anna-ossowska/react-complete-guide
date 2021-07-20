@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer, useContext } from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
+
+import AuthContext from '../../store/auth-context';
 
 // 1. dispatchEmail triggers this function to execute
 const emailReducer = (prevState, action) => {
@@ -58,6 +60,8 @@ const Login = (props) => {
     isValid: null,
   });
 
+  const ctx = useContext(AuthContext);
+
   useEffect(() => {
     console.log('EFFECT RUNNING');
 
@@ -109,7 +113,7 @@ const Login = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onLogin(emailState.value, passwordState.value);
+    ctx.onLogin(emailState.value, passwordState.value);
   };
 
   return (
