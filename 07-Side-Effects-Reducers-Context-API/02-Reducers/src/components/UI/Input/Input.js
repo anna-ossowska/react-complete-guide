@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useRef, useImperativeHandle } from 'react';
 import classes from './Input.module.css';
 
-const Input = (props) => {
+const Input = React.forwardRef((props, ref) => {
+  const inputRef = useRef();
+
+  const activate = () => {
+    inputRef.current.focus();
+  };
+
+  useImperativeHandle(ref, () => {
+    // object containing data that would be used from outside
+    return {
+      focus: activate,
+    };
+  });
+
   return (
     <div
       className={`${classes.control} ${
@@ -10,14 +23,16 @@ const Input = (props) => {
     >
       <label htmlFor={props.id}>{props.label}</label>
       <input
+        ref={inputRef}
         type={props.type}
         id={props.id}
         value={props.value}
         onChange={props.onChange}
         onBlur={props.onBlur}
+        autoComplete={props.autoComplete}
       />
     </div>
   );
-};
+});
 
 export default Input;
