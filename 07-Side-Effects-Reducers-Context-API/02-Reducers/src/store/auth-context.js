@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 // Creating a Context object
 // When React renders a component that subscribes to this object, it will read the current context value from the closest matching Provider above it in the tree.
+// Default properties, inluding dummy fns, are passed for auto-completion purposes
 const AuthContext = React.createContext({
   isLoggedIn: false,
   onLogout: () => {},
@@ -29,6 +30,8 @@ export const AuthContextProvider = (props) => {
     setIsLoggedIn(true);
   };
 
+  // Provider component accepts a value prop which is passed to consumers (child components of the Provider)
+  // All consumers and their children re-render when the Provider's value prop changes
   return (
     <AuthContext.Provider
       value={{

@@ -8,9 +8,9 @@ import AuthContext from './store/auth-context';
 
 function App() {
   const ctx = useContext(AuthContext);
+  console.log(ctx);
 
-  // Provider component accepts a value prop which is passed to consumers (child components of the Provider)
-  // All consumers re-render when the Provider's value prop changes
+  // All consumers and their children re-render when the Provider's value prop changes
   return (
     <React.Fragment>
       <MainHeader />
