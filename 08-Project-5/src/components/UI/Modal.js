@@ -4,7 +4,7 @@ import Card from './Card';
 import classes from './Modal.module.css';
 
 const Overlay = (props) => {
-  return <div className={classes.overlay}></div>;
+  return <div className={classes.overlay} onClick={props.onClose}></div>;
 };
 
 const ModalOverlay = (props) => {
@@ -20,7 +20,7 @@ const portalEl = document.getElementById('overlays');
 const Modal = (props) => {
   return (
     <Fragment>
-      {ReactDOM.createPortal(<Overlay />, portalEl)}
+      {ReactDOM.createPortal(<Overlay onClose={props.onClose} />, portalEl)}
       {ReactDOM.createPortal(
         <ModalOverlay>{props.children}</ModalOverlay>,
         portalEl
