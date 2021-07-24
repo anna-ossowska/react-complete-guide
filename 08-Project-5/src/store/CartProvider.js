@@ -2,7 +2,6 @@ import React, { useReducer } from 'react';
 import CartContext from './cart-context';
 
 const cartReducer = (state, action) => {
-  console.log(action);
   if (action.type === 'ADD') {
     // 1. Calculating Total
     const updatedTotalAmount =
