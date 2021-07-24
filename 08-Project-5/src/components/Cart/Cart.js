@@ -17,8 +17,6 @@ const Cart = (props) => {
     console.log(item);
   };
 
-  console.log('whaaat', cartCtx);
-
   // DUMMY Cart items
   const cartItems = (
     <ul className={classes['cart-items']}>
