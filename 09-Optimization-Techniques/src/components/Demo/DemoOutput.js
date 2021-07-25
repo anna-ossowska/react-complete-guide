@@ -3,7 +3,7 @@ import MyParagraph from './MyParagraph';
 
 const DemoOutput = (props) => {
   console.log('DemoOutput RUNNING');
-  return <MyParagraph>{props.show ? 'This is new' : ''};</MyParagraph>;
+  return <MyParagraph>{props.show ? 'This is new' : ''}</MyParagraph>;
 };
 
-export default DemoOutput;
+export default React.memo(DemoOutput);
