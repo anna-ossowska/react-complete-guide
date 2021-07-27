@@ -6,25 +6,45 @@ import './App.css';
 function App() {
   const [movies, setMovies] = useState([]);
 
-  const fetchMoviesHandler = () => {
-    fetch('https://swapi.dev/api/films/').then((response) => {
-      if (response.ok) {
-        return response.json().then((data) => {
-          console.log(data.results);
+  async function fetchMoviesHandler() {
+    try {
+      const response = await fetch('https://swapi.dev/api/films/');
 
-          const transformedMovies = data.results.map((movieData) => {
-            return {
-              id: movieData.episode_id,
-              title: movieData.title,
-              releaseDate: movieData.release_date,
-              openingText: movieData.opening_crawl,
-            };
-          });
-          setMovies(transformedMovies);
+      if (response.ok) {
+        const data = await response.json();
+
+        const transformedMovies = data.results.map((movieData) => {
+          return {
+            id: movieData.episode_id,
+            title: movieData.title,
+            releaseDate: movieData.release_date,
+            openingText: movieData.opening_crawl,
+          };
         });
+        setMovies(transformedMovies);
       }
-    });
-  };
+    } catch (err) {
+      console.error(err);
+    }
+
+    // fetch('https://swapi.dev/api/films/').then((response) => {
+    //   if (response.ok) {
+    //     return response.json().then((data) => {
+    //       console.log(data.results);
+
+    //       const transformedMovies = data.results.map((movieData) => {
+    //         return {
+    //           id: movieData.episode_id,
+    //           title: movieData.title,
+    //           releaseDate: movieData.release_date,
+    //           openingText: movieData.opening_crawl,
+    //         };
+    //       });
+    //       setMovies(transformedMovies);
+    //     });
+    //   }
+    // });
+  }
 
   return (
     <React.Fragment>
