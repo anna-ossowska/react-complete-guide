@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import MoviesList from './components/MoviesList';
 import './App.css';
@@ -8,13 +8,12 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  async function fetchMoviesHandler() {
+  const fetchMoviesHandler = useCallback(async function () {
+    setIsLoading(true);
+    // Clearing any prev errors
+    setError(null);
+
     try {
-      setIsLoading(true);
-
-      // Clearing any prev errors
-      setError(null);
-
       const response = await fetch('https://swapi.dev/api/films/');
       console.log(response);
 
@@ -38,7 +37,17 @@ function App() {
     }
 
     setIsLoading(false);
-  }
+  }, []);
+
+  // Fetching data as soon as the component loads
+  // Fetching data from API is a side effect, thus, such a state should be handled with useEffect
+  // We refer to fetchMoviesHandler as a dependency because in the future we might alter the function
+  // in a way it relies on some external state, and we want to avoid any potential bugs
+  // However, this solution produces another potential bug: fns are objects, and with each App component re-execution, we recreate the fn from scratch
+  // To avoid creating an infinite loop, we must wrap the async function with useCallback()
+  useEffect(() => {
+    fetchMoviesHandler();
+  }, [fetchMoviesHandler]);
 
   // fetch('https://swapi.dev/api/films/').then((response) => {
   //   if (response.ok) {
