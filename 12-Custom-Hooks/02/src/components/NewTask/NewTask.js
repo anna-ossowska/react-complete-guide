@@ -12,7 +12,7 @@ const NewTask = (props) => {
     setError(null);
     try {
       const response = await fetch(
-        'https://react-http-6b4a6.firebaseio.com/tasks.json',
+        'https://react-http-92c39-default-rtdb.europe-west1.firebasedatabase.app/tasks.json',
         {
           method: 'POST',
           body: JSON.stringify({ text: taskText }),
@@ -28,7 +28,8 @@ const NewTask = (props) => {
 
       const data = await response.json();
 
-      const generatedId = data.name; // firebase-specific => "name" contains generated id
+      // firebase-specific => "name" contains generated id
+      const generatedId = data.name;
       const createdTask = { id: generatedId, text: taskText };
 
       props.onAddTask(createdTask);

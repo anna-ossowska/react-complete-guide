@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import Tasks from './components/Tasks/Tasks';
 import NewTask from './components/NewTask/NewTask';
+import useHttp from './hooks/use-http';
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,7 +14,7 @@ function App() {
     setError(null);
     try {
       const response = await fetch(
-        'https://react-http-6b4a6.firebaseio.com/tasks.json'
+        'https://react-http-92c39-default-rtdb.europe-west1.firebasedatabase.app/tasks.json'
       );
 
       if (!response.ok) {
