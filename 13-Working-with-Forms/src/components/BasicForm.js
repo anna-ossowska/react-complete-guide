@@ -1,11 +1,16 @@
-import { useState } from 'react';
+import useFormInput from '../hooks/use-form-input';
 
 const BasicForm = (props) => {
-  const [enteredName, setEnteredName] = useState('');
-  const [nameIsTouched, setNameisTouched] = useState(false);
+  const validateName = (value) => value !== '';
 
-  const nameIsValid = enteredName !== '';
-  const nameInputHasError = !nameIsValid && nameIsTouched;
+  const {
+    value: enteredName,
+    valueIsValid: nameIsValid,
+    hasError: nameInputHasError,
+    valueChangeHandler: nameChangeHandler,
+    valueBlurHandler: nameBlurHandler,
+    resetInput,
+  } = useFormInput(validateName);
 
   let formIsValid = false;
 
@@ -13,25 +18,15 @@ const BasicForm = (props) => {
     formIsValid = true;
   }
 
-  const nameChangeHandler = (e) => {
-    setEnteredName(e.target.value);
-  };
-
-  const nameBlurHandler = () => {
-    setNameisTouched(true);
-  };
-
   const submitHandler = (e) => {
     e.preventDefault();
-    setNameisTouched(true);
 
     if (!nameIsValid) return;
 
     console.log(enteredName);
     console.log(nameIsValid);
 
-    setEnteredName('');
-    setNameisTouched(false);
+    resetInput();
   };
 
   const nameInputClasses = nameInputHasError
