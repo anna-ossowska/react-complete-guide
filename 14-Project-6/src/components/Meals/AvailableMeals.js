@@ -5,11 +5,14 @@ import MealItem from './MealItem/MealItem';
 
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const url =
     'https://react-http-92c39-default-rtdb.europe-west1.firebasedatabase.app/meals.json';
 
   const fetchMeals = useCallback(async () => {
+    setIsLoading(true);
+
     try {
       const response = await fetch(url);
 
@@ -30,9 +33,8 @@ const AvailableMeals = () => {
         });
       }
       setMeals(loadMeals);
-    } catch (err) {
-      console.error(err);
-    }
+    } catch (err) {}
+    setIsLoading(false);
   }, []);
 
   console.log(meals);
@@ -41,10 +43,18 @@ const AvailableMeals = () => {
     fetchMeals();
   }, [fetchMeals]);
 
+  let content = '';
+
+  if (isLoading) {
+    content = <p className={classes['loading-text']}>Loading...</p>;
+  }
+
   return (
     <section className={classes.meals}>
       <Card>
         <ul>
+          {content}
+
           {meals.map((meal) => {
             return (
               <MealItem
