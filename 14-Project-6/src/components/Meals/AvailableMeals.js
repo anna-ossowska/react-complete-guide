@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './AvailableMeals.module.css';
 import Card from '../UI/Card';
 import MealItem from './MealItem/MealItem';
@@ -11,11 +11,12 @@ const AvailableMeals = () => {
   const url =
     'https://react-http-92c39-default-rtdb.europe-west1.firebasedatabase.app/meals.json';
 
-  const fetchMeals = useCallback(async () => {
+  const fetchMeals = async () => {
     setIsLoading(true);
 
     // Clearing any previous errors
     setHasError(null);
+
     try {
       const response = await fetch(url);
 
@@ -25,28 +26,27 @@ const AvailableMeals = () => {
 
       const data = await response.json();
 
-      let loadMeals = [];
+      let loadedMeals = [];
 
       for (const key in data) {
-        loadMeals.push({
+        loadedMeals.push({
           id: key,
           name: data[key].name,
           description: data[key].description,
           price: data[key].price,
         });
       }
-      setMeals(loadMeals);
+      setMeals(loadedMeals);
+      setIsLoading(false);
     } catch (err) {
+      setIsLoading(false);
       setHasError(err.message || 'Data cannot be displayed');
     }
-    setIsLoading(false);
-  }, []);
-
-  console.log(meals);
+  };
 
   useEffect(() => {
     fetchMeals();
-  }, [fetchMeals]);
+  }, []);
 
   let content = '';
 
