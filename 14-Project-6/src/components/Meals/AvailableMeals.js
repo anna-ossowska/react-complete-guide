@@ -6,6 +6,7 @@ import MealItem from './MealItem/MealItem';
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(null);
 
   const url =
     'https://react-http-92c39-default-rtdb.europe-west1.firebasedatabase.app/meals.json';
@@ -13,6 +14,8 @@ const AvailableMeals = () => {
   const fetchMeals = useCallback(async () => {
     setIsLoading(true);
 
+    // Clearing any previous errors
+    setHasError(null);
     try {
       const response = await fetch(url);
 
@@ -33,7 +36,9 @@ const AvailableMeals = () => {
         });
       }
       setMeals(loadMeals);
-    } catch (err) {}
+    } catch (err) {
+      setHasError(err.message || 'Data cannot be displayed');
+    }
     setIsLoading(false);
   }, []);
 
@@ -44,6 +49,10 @@ const AvailableMeals = () => {
   }, [fetchMeals]);
 
   let content = '';
+
+  if (hasError) {
+    content = <p className={classes['error-text']}>{hasError}</p>;
+  }
 
   if (isLoading) {
     content = <p className={classes['loading-text']}>Loading...</p>;
