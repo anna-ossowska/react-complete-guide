@@ -1,11 +1,9 @@
 import useFormInput from '../hooks/use-form-input';
 
 const BasicForm = (props) => {
-  const validateName = (value) => value.trim() !== '';
+  const isNotEmpty = (value) => value.trim() !== '';
 
-  const validateLastName = (value) => value.trim() !== '';
-
-  const validateEmail = (value) => value.includes('@');
+  const isEmail = (value) => value.includes('@');
 
   const {
     value: enteredName,
@@ -14,7 +12,7 @@ const BasicForm = (props) => {
     valueChangeHandler: nameChangeHandler,
     valueBlurHandler: nameBlurHandler,
     resetInput: resetNameInput,
-  } = useFormInput(validateName);
+  } = useFormInput(isNotEmpty);
 
   const {
     value: enteredLastName,
@@ -23,7 +21,7 @@ const BasicForm = (props) => {
     valueChangeHandler: lastNameChangeHandler,
     valueBlurHandler: lastNameBlurHandler,
     resetInput: resetLastNameInput,
-  } = useFormInput(validateLastName);
+  } = useFormInput(isNotEmpty);
 
   const {
     value: enteredEmail,
@@ -32,7 +30,7 @@ const BasicForm = (props) => {
     valueChangeHandler: emailChangeHandler,
     valueBlurHandler: emailBlurHandler,
     resetInput: resetEmailInput,
-  } = useFormInput(validateEmail);
+  } = useFormInput(isEmail);
 
   let formIsValid = false;
 
@@ -43,11 +41,7 @@ const BasicForm = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if (!nameIsValid && !lastNameIsValid && !emailIsValid) return;
-
-    console.log(enteredName);
-    console.log(enteredLastName);
-    console.log(enteredEmail);
+    if (!formIsValid) return;
 
     resetNameInput();
     resetLastNameInput();
