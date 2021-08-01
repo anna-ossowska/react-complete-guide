@@ -24,6 +24,27 @@ const Cart = (props) => {
     setOrderIsClicked(true);
   };
 
+  const submitOrderHandler = (userData) => {
+    const sendMeals = async () => {
+      const response = await fetch(
+        'https://react-http-92c39-default-rtdb.europe-west1.firebasedatabase.app/orders.json',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userData: userData,
+            orderedItems: cartCtx.items,
+          }),
+        }
+      );
+
+      console.log(await response.json());
+    };
+    sendMeals();
+  };
+
   // DUMMY Cart items
   const cartItems = (
     <ul className={classes['cart-items']}>
@@ -61,7 +82,9 @@ const Cart = (props) => {
         <span>Total amount</span>
         <span>{totalAmount}</span>
       </div>
-      {orderIsClicked && <Checkout onCancel={props.onClose} />}
+      {orderIsClicked && (
+        <Checkout onConfirm={submitOrderHandler} onCancel={props.onClose} />
+      )}
       {!orderIsClicked && modalActions}
     </Modal>
   );
