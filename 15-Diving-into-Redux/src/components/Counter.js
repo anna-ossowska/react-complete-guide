@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const Counter = () => {
   const counter = useSelector((state) => state.counter);
+  const showCounter = useSelector((state) => state.showCounter);
 
   // fn which will dispatch an action against the redux store
   const dispatch = useDispatch();
@@ -19,12 +20,14 @@ const Counter = () => {
     dispatch({ type: 'decrement' });
   };
 
-  const toggleCounterHandler = () => {};
+  const toggleCounterHandler = () => {
+    dispatch({ type: 'toggle' });
+  };
 
   return (
     <main className={classes.counter}>
       <h1>Redux Counter</h1>
-      <div className={classes.value}>{counter}</div>
+      {showCounter && <div className={classes.value}>{counter}</div>}
       <div>
         <button onClick={decrementHandler}>-</button>
         <button onClick={increaseHanlder}>+ 10</button>
