@@ -8,13 +8,20 @@ const Cart = (props) => {
   const isShown = useSelector((state) => state.isShown);
   const cartItems = useSelector((state) => state.items);
 
-  console.log('caaart', cartItems);
+  const cartMessage =
+    cartItems.length === 0 ? (
+      <h2 className={classes['cart-msg']}>
+        Nothing has been added to your cart yet
+      </h2>
+    ) : (
+      <h2 className={classes['cart-msg']}>Your Shopping Cart</h2>
+    );
 
   return (
     <Fragment>
       {isShown && (
         <Card className={classes.cart}>
-          <h2>Your Shopping Cart</h2>
+          {cartMessage}
           <ul>
             {cartItems.map((item) => {
               return (

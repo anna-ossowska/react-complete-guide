@@ -5,7 +5,6 @@ import { createAction } from '@reduxjs/toolkit';
 
 const CartItem = (props) => {
   const { id, title, price, description, quantity, total } = props.item;
-  console.log(total);
 
   const dispatch = useDispatch();
 
