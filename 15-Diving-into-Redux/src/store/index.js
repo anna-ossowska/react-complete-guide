@@ -1,12 +1,12 @@
-import { createStore } from 'redux';
+// import { createStore } from 'redux';
 import { createSlice, configureStore } from '@reduxjs/toolkit';
 
-const initialState = { counter: 0, showCounter: true };
+const initialCounterState = { counter: 0, showCounter: true };
 
 // With Redux Toolkit we are allowed to mutate the state
 const counterSlice = createSlice({
   name: 'counter',
-  initialState,
+  initialState: initialCounterState,
   // functions intended to handle a specific action type, equivalent to a single case statement in a switch
   reducers: {
     increment(state) {
@@ -24,11 +24,31 @@ const counterSlice = createSlice({
   },
 });
 
+const initialAuthState = { isAuthenticated: false };
+
+const authSlice = createSlice({
+  name: 'auth',
+  initialState: initialAuthState,
+  reducers: {
+    logIn(state) {
+      state.isAuthenticated = true;
+    },
+    logOut(state) {
+      state.isAuthenticated = false;
+    },
+  },
+});
+
 const store = configureStore({
-  reducer: counterSlice.reducer,
+  // Merging reducers together into one ROOT reducer
+  reducer: {
+    counter: counterSlice.reducer,
+    auth: authSlice.reducer,
+  },
 });
 
 export const counterActions = counterSlice.actions;
+export const authActions = authSlice.actions;
 
 // We want to connect React app to this store
 export default store;

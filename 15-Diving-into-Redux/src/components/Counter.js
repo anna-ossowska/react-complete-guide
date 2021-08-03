@@ -3,15 +3,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { counterActions } from '../store/index.js';
 
 const Counter = () => {
-  const counter = useSelector((state) => state.counter);
-  const showCounter = useSelector((state) => state.showCounter);
-  console.log(counterActions);
+  const counter = useSelector((state) => state.counter.counter);
+  const showCounter = useSelector((state) => state.counter.showCounter);
 
   // fn which will dispatch an action against the redux store
   const dispatch = useDispatch();
 
   const incrementHandler = () => {
     dispatch(counterActions.increment());
+    // console.log(store.getState());
   };
 
   const increaseHanlder = () => {
