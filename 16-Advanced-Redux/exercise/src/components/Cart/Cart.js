@@ -6,6 +6,9 @@ import { Fragment } from 'react';
 
 const Cart = (props) => {
   const isShown = useSelector((state) => state.isShown);
+  const cartItems = useSelector((state) => state.items);
+
+  console.log('caaart', cartItems);
 
   return (
     <Fragment>
@@ -13,9 +16,20 @@ const Cart = (props) => {
         <Card className={classes.cart}>
           <h2>Your Shopping Cart</h2>
           <ul>
-            <CartItem
-              item={{ title: 'Test Item', quantity: 3, total: 18, price: 6 }}
-            />
+            {cartItems.map((item) => {
+              return (
+                <CartItem
+                  item={{
+                    id: item.id,
+                    title: item.title,
+                    price: item.price,
+                    desscription: item.desscription,
+                    quantity: item.quantity,
+                    total: item.total,
+                  }}
+                />
+              );
+            })}
           </ul>
         </Card>
       )}
