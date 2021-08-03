@@ -8,7 +8,6 @@ const counterSlice = createSlice({
   name: 'counter',
   initialState,
   // functions intended to handle a specific action type, equivalent to a single case statement in a switch
-  // The fns in the object will be used to generate string action type constants
   reducers: {
     increment(state) {
       state.counter++;
@@ -17,7 +16,7 @@ const counterSlice = createSlice({
       state.counter--;
     },
     increase(state, action) {
-      state.counter = state.counter + action.amount;
+      state.counter = state.counter + action.payload;
     },
     toggleCounter(state) {
       state.showCounter = !state.showCounter;
@@ -25,11 +24,11 @@ const counterSlice = createSlice({
   },
 });
 
-console.log(counterSlice);
-
 const store = configureStore({
   reducer: counterSlice.reducer,
 });
+
+export const counterActions = counterSlice.actions;
 
 // We want to connect React app to this store
 export default store;
