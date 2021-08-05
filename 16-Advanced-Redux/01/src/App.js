@@ -30,7 +30,10 @@ function App() {
     }
     // Before we always dispatched action creators - fns that return an action object with a type, and so on
     // Here we dispatch a fn that return another fn
-    dispatch(sendCartData(cart));
+
+    if (cart.changed) {
+      dispatch(sendCartData(cart));
+    }
   }, [cart, dispatch]);
 
   return (
