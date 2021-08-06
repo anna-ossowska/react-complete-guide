@@ -1,21 +1,17 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import QuoteList from '../components/quotes/QuoteList';
 
 const AllQuotes = () => {
+  const DUMMY_QUOTES = [
+    { id: 'q1', author: 'John', text: 'Random quote 1' },
+    { id: 'q2', author: 'Jane', text: 'Random quote 2' },
+  ];
+
   return (
     <Fragment>
       <h1>All quotes</h1>
-      <ul>
-        <li>
-          <Link to="/quotes/q1">Quote 1</Link>
-        </li>
-        <li>
-          <Link to="/quotes/p2">Quote 2</Link>
-        </li>
-        <li>
-          <Link to="/quotes/p3">Quote 3</Link>
-        </li>
-      </ul>
+      <QuoteList quotes={DUMMY_QUOTES} />
     </Fragment>
   );
 };
