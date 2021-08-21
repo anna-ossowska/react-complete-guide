@@ -17,6 +17,10 @@ const QuoteDetail = () => {
     return <p>No quote found.</p>;
   }
 
+  // if (!quote) {
+  //   return <NotFound />;
+  // }
+
   return (
     <Fragment>
       <HighlightedQuote text={quote.text} author={quote.author} />
