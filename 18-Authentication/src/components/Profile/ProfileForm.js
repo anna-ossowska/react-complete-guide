@@ -16,7 +16,7 @@ const ProfileForm = () => {
 
     const enteredNewPassword = newPasswordInputRef.current.value;
     fetch(
-      'https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyCXnEo1Yig7-efQluf-mhOCal_Ed8C8ck0',
+      'https://identitytoolkit.googleapis.com/v1/accounts:update?key=[API_KEY]',
       {
         method: 'POST',
         headers: {
